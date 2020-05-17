@@ -181,7 +181,7 @@ Search::Search(SearchParams params, NNEvaluator* nnEval, const string& rSeed)
   const uint64_t numTrees = 128;
   const uint64_t numNeighbors = 8;
 
-  std::unique_ptr<Aggregator> aggregatorPtr = std::make_unique<AverageAggregator>();
+  std::unique_ptr<Aggregator> aggregatorPtr = std::make_unique<WeightedAverageAggregatorPair>();
   memoryPtr = std::make_unique<Memory>(featureDim, memorySize, numTrees, numNeighbors, aggregatorPtr);
   lambda = 0.2;
 }

@@ -68,6 +68,23 @@ double Memory::Query(const FeatureVector &target) {
   return result;
 }
 
+
+
+std::pair<double, int> Memory::QueryPair(const FeatureVector &target) {
+  if (annoyOutDated) {
+	Build();
+	annoyOutDated = false;
+  }
+
+  std::vector<EntryID> nnIDs;
+  std::vector<double> distances;
+
+  annoyPtr->get_nns_by_vector(target.data(), numNeighbors, -1, &nnIDs, &distances);
+  const std::vector<std::shared_ptr<MemoryEntry>> &entryPtrs = GetEntriesByIDs(nnIDs);
+  std::pair<double, int> result(aggregatorPtr->AggregatePair(entryPtrs, distances));
+  return result;
+}
+
 void Memory::TouchEntriesByIDs(const vector<EntryID> &nn_ids) {
   auto &index_by_id = this->entries.get<0>();
   for (auto &id : nn_ids) {

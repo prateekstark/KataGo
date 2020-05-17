@@ -39,6 +39,7 @@ public:
 
   void Update(const EntryID &id, const FeatureVector &featureVector, const double &value, const uint64_t &numVisits);
 //  FeatureVector Query(const FeatureVector &target);
+  std::pair<double, int> QueryPair(const FeatureVector &target);
   double Query(const FeatureVector &target);
   void Build();
   void TouchEntriesByIDs(const vector<EntryID> &nn_ids);
