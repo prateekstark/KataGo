@@ -71,6 +71,9 @@ struct SearchNode {
   Player nextPla;
   Loc prevMoveLoc;
 
+  Board boardState;
+
+
   //Mutable---------------------------------------------------------------------------
   //All of these values are protected under the mutex indicated by lockIdx
   //nnOutput at a given node MAY be mutated during search, but of course will always be done under the lock.

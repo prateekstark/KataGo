@@ -60,7 +60,8 @@ SearchNode::SearchNode(Search& search, Player prevPla, Rand& rand, Loc prevLoc)
    nnOutput(),
    nnOutputAge(0),
    children(NULL),numChildren(0),childrenCapacity(0),
-   stats(),virtualLosses(0)
+   stats(),virtualLosses(0),
+   boardState(search.rootBoard)
 {
   lockIdx = rand.nextUInt(search.mutexPool->getNumMutexes());
 }
@@ -1649,7 +1650,17 @@ void Search::addLeafValue(SearchNode& node, double winValue, double noResultValu
     getResultUtility(winValue, noResultValue)
     + getScoreUtility(scoreMean, scoreMeanSq, 1.0);
 
-  cout << memoryPtr->entries.size() << endl;
+  vector<uint8_t> gameState(node.boardState.toOneHotFeatureVector());
+  
+  // cout << gameState.size() << endl;
+
+/* PrintBoardState
+  for(int i=0;i<gameState.size();i++){
+    cout << gameState[i] << " "; 
+  }
+  cout << endl;
+*/
+  // cout << memoryPtr->entries.size() << endl;
 
   // Add from the memoryQueryFunction.
   double memoryQueryUtility = 0;

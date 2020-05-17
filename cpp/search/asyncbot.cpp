@@ -28,6 +28,7 @@ AsyncBot::AsyncBot(SearchParams params, NNEvaluator* nnEval, Logger* l, const st
 {
   search = new Search(params,nnEval,randSeed);
   searchThread = std::thread(searchThreadLoop,this,l);
+  // cout << "How many times does it happen?" << endl;
 }
 
 AsyncBot::~AsyncBot() {
@@ -46,6 +47,7 @@ AsyncBot::~AsyncBot() {
 const Board& AsyncBot::getRootBoard() const {
   return search->rootBoard;
 }
+
 const BoardHistory& AsyncBot::getRootHist() const {
   return search->rootHistory;
 }
