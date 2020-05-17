@@ -2138,6 +2138,11 @@ struct Buffers {
   size_t inputElts;
   size_t inputGlobalElts;
 
+
+  // Made this a variable in BufferScope
+  size_t batchXYElts;
+  size_t maxMidChannels;
+
   cl_mem mask;
   cl_mem maskSum;
 
@@ -2178,7 +2183,7 @@ struct Buffers {
   Buffers& operator=(const Buffers&) = delete;
 
   Buffers(ComputeHandleInternal* handle, const Model& m) {
-    size_t batchXYElts = (size_t)m.maxBatchSize * m.nnXLen * m.nnYLen;
+    batchXYElts = (size_t)m.maxBatchSize * m.nnXLen * m.nnYLen;
     size_t batchElts = (size_t)m.maxBatchSize;
 
     inputElts = m.numInputChannels * batchXYElts;
@@ -2193,7 +2198,8 @@ struct Buffers {
 
     trunk = createReadWriteBuffer(handle, m.trunk->trunkNumChannels * batchXYElts);
     trunkScratch = createReadWriteBuffer(handle, m.trunk->trunkNumChannels * batchXYElts);
-    size_t maxMidChannels = std::max(m.trunk->regularNumChannels + m.trunk->dilatedNumChannels, m.trunk->midNumChannels);
+    maxMidChannels = std::max(m.trunk->regularNumChannels + m.trunk->dilatedNumChannels, m.trunk->midNumChannels);
+
     mid = createReadWriteBuffer(handle, maxMidChannels * batchXYElts);
     midScratch = createReadWriteBuffer(handle, maxMidChannels * batchXYElts);
     size_t maxGPoolChannels = std::max(m.trunk->gpoolNumChannels, m.policyHead->g1Channels);
@@ -2381,6 +2387,7 @@ struct InputBuffers {
   float* valueResults; //Host pointer
   float* scoreValueResults; //Host pointer
   float* ownershipResults; //Host pointer
+  int mid_feature_size;
 
   InputBuffers(const LoadedModel* loadedModel, int maxBatchSz, int nnXLen, int nnYLen) {
     const ModelDesc& m = loadedModel->modelDesc;
@@ -2528,7 +2535,7 @@ void NeuralNet::getOutput(
     NULL
   );
   CHECK_ERR(err);
-
+  // cout << inputBuffers->singleInputGlobalBytes << endl;
   gpuHandle->model->apply(
     handle,
     batchSize,
@@ -2569,7 +2576,18 @@ void NeuralNet::getOutput(
     buffers->convWorkspace2
   );
 
+  size_t feature_size = (size_t) ((buffers->batchXYElts)*(buffers->maxMidChannels));
+  float* extractFeature = new float[feature_size];
+
+  // cout << sizeof(buffers->mid) << endl;
+  // cout << feature_size << endl;
   cl_bool blocking = CL_TRUE;
+
+  err = clEnqueueReadBuffer(
+    handle->commandQueue, buffers->mid, blocking, 0, feature_size*batchSize*sizeof(float), extractFeature, 0, NULL, NULL
+  );
+  CHECK_ERR(err);
+  
   err = clEnqueueReadBuffer(
     handle->commandQueue, buffers->policyPass, blocking, 0, inputBuffers->singlePolicyPassResultBytes*batchSize, inputBuffers->policyPassResults, 0, NULL, NULL
   );
@@ -2627,6 +2645,10 @@ void NeuralNet::getOutput(
     assert(output->nnYLen == nnYLen);
 
     float* policyProbs = output->policyProbs;
+    for(int a=0;a<feature_size;a++){
+      output->midLayerFeatures.push_back(extractFeature[a]);
+    }
+    // output->midLayerFeatures {extractFeature, extractFeature+feature_size};
 
     //These are not actually correct, the client does the postprocessing to turn them into
     //policy probabilities and white game outcome probabilities

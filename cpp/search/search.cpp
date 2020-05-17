@@ -174,6 +174,15 @@ Search::Search(SearchParams params, NNEvaluator* nnEval, const string& rSeed)
 
   rootHistory.clear(rootBoard,rootPla,Rules(),0);
   rootKoHashTable->recompute(rootHistory);
+
+  const uint64_t featureDim = Board::MAX_ARR_SIZE * 4;
+  const uint64_t memorySize = 512;
+  const uint64_t numTrees = 128;
+  const uint64_t numNeighbors = 8;
+
+  std::unique_ptr<Aggregator> aggregatorPtr = std::make_unique<AverageAggregator>();
+  memoryPtr = std::make_unique<Memory>(featureDim, memorySize, numTrees, numNeighbors, aggregatorPtr);
+  lambda = 0.2;
 }
 
 Search::~Search() {
@@ -793,6 +802,9 @@ void Search::computeRootValues() {
         nnResultBuf, skipCache, includeOwnerMap
       );
       expectedScore = nnResultBuf.result->whiteScoreMean;
+//      const vector<uint8_t> &oneHotFeatureVector = board.toOneHotFeatureVector();
+//      const FeatureVector vector(oneHotFeatureVector.begin(), oneHotFeatureVector.end());
+//      double memoryValue = memoryPtr->Query(vector);
     }
 
     recentScoreCenter = expectedScore * (1.0 - searchParams.dynamicScoreCenterZeroWeight);
@@ -1637,8 +1649,24 @@ void Search::addLeafValue(SearchNode& node, double winValue, double noResultValu
     getResultUtility(winValue, noResultValue)
     + getScoreUtility(scoreMean, scoreMeanSq, 1.0);
 
+  cout << memoryPtr->entries.size() << endl;
+
+  // Add from the memoryQueryFunction.
+  double memoryQueryUtility = 0;
+  double memoryQueryVisit = 0;
+  int visitCount = 1;
+
+  
+  if(memoryPtr->entries.size() > 0){
+    utility = (1-lambda)*utility + lambda*memoryQueryUtility;
+    visitCount = (1-lambda) + lambda*memoryQueryVisit;
+  }
+
+  // cout << memoryPtr->Query((FeatureVector) node.nnOutput->midLayerFeatures) << endl;
+  // cout << node.nnOutput->midLayerFeatures.size() << endl;
+
   while(node.statsLock.test_and_set(std::memory_order_acquire));
-  node.stats.visits += 1;
+  node.stats.visits += visitCount;
   node.stats.winValueSum += winValue;
   node.stats.noResultValueSum += noResultValue;
   node.stats.scoreMeanSum += scoreMean;
