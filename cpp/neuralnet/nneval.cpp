@@ -891,9 +891,9 @@ void NNEvaluator::evaluate(
 
   //And record the nnHash in the result and put it into the table
   buf.result->nnHash = nnHash;
+  buf.result->boardState = board;
   if(nnCacheTable != NULL)
     nnCacheTable->set(buf.result);
-
 }
 
 //Uncomment this to lower the effective hash size down to one where we get true collisions

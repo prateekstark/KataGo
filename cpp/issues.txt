@@ -1,3 +1,9 @@
 1) Integrate Query and Update in the same function
 2) Change the Update function to make the in-memory changes
 3) The Query function returns only the utility as of now, but I think we also need to return the number of visits. It is mentioned in the paper for both the stats.
+
+
+---------------------------------------Done
+New Issues: 
+4) It's not running yet. The id should be of Hash128 type. Please change that.
+5) Also, it might not be a perfect code, their might be some mistakes. If you observe any please correct. I'll correct the rest after waking up. I think after doing issue 4) the code should work fine syntactically.

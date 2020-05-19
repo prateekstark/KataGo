@@ -40,7 +40,8 @@ struct ReportedSearchValues {
 };
 
 struct NodeStats {
-  int64_t visits;
+  // int64_t visits;
+  double visits;
   double winValueSum;
   double noResultValueSum;
   double scoreMeanSum;
@@ -50,6 +51,9 @@ struct NodeStats {
   double utilitySqSum;
   double weightSum;
   double weightSqSum;
+  double utilityMemory;
+  double numVisitsMemory;
+  double R;
 
   NodeStats();
   ~NodeStats();
@@ -70,8 +74,6 @@ struct SearchNode {
   //Constant during search--------------------------------------------------------------
   Player nextPla;
   Loc prevMoveLoc;
-
-  Board boardState;
 
 
   //Mutable---------------------------------------------------------------------------
@@ -183,7 +185,8 @@ struct Search {
 
   // MMCTS Related
   std::unique_ptr<Memory> memoryPtr;
-  float lambda;
+  double lambda;
+  double eta;
 
   //Note - randSeed controls a few things in the search, but a lot of the randomness actually comes from
   //random symmetries of the neural net evaluations, see nneval.h

@@ -15,6 +15,7 @@
 #include "../../../../Thirdparty/annoy/src/annoylib.h"
 
 typedef int32_t EntryID;
+// typedef Hash128 EntryID;
 typedef std::vector<double> FeatureVector;
 typedef AnnoyIndex<EntryID, double, Angular, Kiss32Random> IndexType;
 typedef std::unique_ptr<IndexType> AnnoyPtr;
