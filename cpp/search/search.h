@@ -187,6 +187,8 @@ struct Search {
   std::unique_ptr<Memory> memoryPtr;
   double lambda;
   double eta;
+  int searchCount;
+
 
   //Note - randSeed controls a few things in the search, but a lot of the randomness actually comes from
   //random symmetries of the neural net evaluations, see nneval.h

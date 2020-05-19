@@ -28,6 +28,13 @@ void Memory::Update(
 	const double &value,
 	const uint64_t &numVisits
 ) {
+
+
+
+  // std::cout << featureVector.size() << " " << featureDim << std::endl;
+
+
+
   assert(featureVector.size() == featureDim);
 
   MemoryEntry entry(

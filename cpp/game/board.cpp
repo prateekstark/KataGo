@@ -2524,8 +2524,19 @@ Board Board::parseBoard(int xSize, int ySize, const string& s, char lineDelimite
   return board;
 }
 
-std::vector<uint8_t> Board::toOneHotFeatureVector() const {
-  std::vector<uint8_t> result;
+// std::vector<uint8_t> Board::toOneHotFeatureVector() const {
+//   std::vector<uint8_t> result;
+//   for (const auto &color : this->colors) {
+//     std::vector<uint8_t> one_hot_color(4, 0);
+//     one_hot_color[color] = 1;
+//     result.insert(result.end(), one_hot_color.begin(), one_hot_color.end());
+//   }
+//   return result;
+// }
+
+
+std::vector<double> Board::toOneHotFeatureVector() const {
+  std::vector<double> result;
   for (const auto &color : this->colors) {
     std::vector<uint8_t> one_hot_color(4, 0);
     one_hot_color[color] = 1;
