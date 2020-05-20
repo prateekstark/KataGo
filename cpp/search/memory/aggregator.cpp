@@ -62,6 +62,7 @@ std::pair<double, int> WeightedAverageAggregatorPair::AggregatePair(
     result += entries[i]->value * (distances[i] / distSum);
     numVisits += entries[i]->numVisits * (distances[i] / distSum);
   }
+  // std::cout << "result: " << result << std::endl;
   assert(0.0 <= result && result <= 1.0);
   return make_pair(result, numVisits);
 }
