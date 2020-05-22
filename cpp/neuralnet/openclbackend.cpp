@@ -2199,7 +2199,6 @@ struct Buffers {
     trunk = createReadWriteBuffer(handle, m.trunk->trunkNumChannels * batchXYElts);
     trunkScratch = createReadWriteBuffer(handle, m.trunk->trunkNumChannels * batchXYElts);
     size_t maxMidChannels = std::max(m.trunk->regularNumChannels + m.trunk->dilatedNumChannels, m.trunk->midNumChannels);
-
     mid = createReadWriteBuffer(handle, maxMidChannels * batchXYElts);
     midScratch = createReadWriteBuffer(handle, maxMidChannels * batchXYElts);
     size_t maxGPoolChannels = std::max(m.trunk->gpoolNumChannels, m.policyHead->g1Channels);
@@ -2387,7 +2386,7 @@ struct InputBuffers {
   float* valueResults; //Host pointer
   float* scoreValueResults; //Host pointer
   float* ownershipResults; //Host pointer
-  int mid_feature_size;
+  // int mid_feature_size;
 
   InputBuffers(const LoadedModel* loadedModel, int maxBatchSz, int nnXLen, int nnYLen) {
     const ModelDesc& m = loadedModel->modelDesc;

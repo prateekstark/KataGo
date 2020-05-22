@@ -7,17 +7,14 @@
 #include <random>
 #include <memory>
 #include <functional>
-#include<chrono>
-#include <cassert>
+#include <chrono>
+#include <assert.h>
 
-
-#include "../../../../Thirdparty/annoy/src/kissrandom.h"
-#include "../../../../Thirdparty/annoy/src/annoylib.h"
+#include "../../external/annoy/src/kissrandom.h"
+#include "../../external/annoy/src/annoylib.h"
 
 typedef int32_t EntryID;
-// typedef Hash128 EntryID;
 typedef std::vector<double> FeatureVector;
-// typedef std::vector<uint8_t> FeatureVector;
 typedef AnnoyIndex<EntryID, double, Angular, Kiss32Random> IndexType;
 typedef std::unique_ptr<IndexType> AnnoyPtr;
 

@@ -62,8 +62,6 @@ SearchNode::SearchNode(Search& search, Player prevPla, Rand& rand, Loc prevLoc)
    children(NULL),numChildren(0),childrenCapacity(0),
    stats(),virtualLosses(0)
 {
-  // cout << Location::toString(prevLoc, 19, 19) << endl;
-
   lockIdx = rand.nextUInt(search.mutexPool->getNumMutexes());
 }
 SearchNode::~SearchNode() {
@@ -177,18 +175,13 @@ Search::Search(SearchParams params, NNEvaluator* nnEval, const string& rSeed)
   rootHistory.clear(rootBoard,rootPla,Rules(),0);
   rootKoHashTable->recompute(rootHistory);
 
-  // const uint64_t featureDim = Board::MAX_ARR_SIZE * 4;
-  // const uint64_t featureDim = 34656;
-  const uint64_t featureDim = 1684;
-  const uint64_t memorySize = 512;
-  const uint64_t numTrees = 32;
-  const uint64_t numNeighbors = 8;
+  const uint64_t featureDim = Board::MAX_ARR_SIZE * 4;
+  const uint64_t memorySize = 2000;
+  const uint64_t numTrees = 10;
+  const uint64_t numNeighbors = 5;
 
-  std::unique_ptr<Aggregator> aggregatorPtr = std::make_unique<WeightedAverageAggregatorPair>();
+  std::unique_ptr<Aggregator> aggregatorPtr = std::make_unique<AverageAggregator>();
   memoryPtr = std::make_unique<Memory>(featureDim, memorySize, numTrees, numNeighbors, aggregatorPtr);
-  lambda = 0.2;
-  eta = 1.1;
-  searchCount = 0;
 }
 
 Search::~Search() {
@@ -810,7 +803,7 @@ void Search::computeRootValues() {
       expectedScore = nnResultBuf.result->whiteScoreMean;
 //      const vector<uint8_t> &oneHotFeatureVector = board.toOneHotFeatureVector();
 //      const FeatureVector vector(oneHotFeatureVector.begin(), oneHotFeatureVector.end());
-//      double memoryValue = memoryPtr->Query(vector);
+//      double memoryValue = memoryPtr->query(vector);
     }
 
     recentScoreCenter = expectedScore * (1.0 - searchParams.dynamicScoreCenterZeroWeight);
@@ -1472,7 +1465,6 @@ void Search::selectBestChildToDescend(
 
 }
 void Search::updateStatsAfterPlayout(SearchNode& node, SearchThread& thread, int32_t virtualLossesToSubtract, bool isRoot) {
-  // cout << "Is it ever getting here?" << endl;
   recomputeNodeStats(node,thread,1,virtualLossesToSubtract,isRoot);
 }
 
@@ -1672,9 +1664,9 @@ void Search::recomputeNodeStats(SearchNode& node, SearchThread& thread, int numV
   node.stats.visits += numVisitsToAdd;
 
   // cout << "utilitySumBefore: " << utilitySum << endl;
-  vector<double> gameState(node.nnOutput->boardState.toOneHotFeatureVector());
-  memoryPtr->Update(searchCount, gameState, utilitySum/node.stats.visits, node.stats.visits);
-  searchCount = (searchCount+1)%800;
+  // vector<double> gameState(node.nnOutput->boardState.toOneHotFeatureVector());
+  // memoryPtr->Update(searchCount, gameState, utilitySum/node.stats.visits, node.stats.visits);
+  // searchCount = (searchCount+1)%800;
   // utilitySum = ((1-lambda)*(utilitySum/node.stats.visits) + lambda*memoryQueryUtility)*node.stats.visits;
   // cout << "utilitySumAfter: " << utilitySum << endl;
   
@@ -1707,14 +1699,14 @@ void Search::runSinglePlayout(SearchThread& thread) {
   thread.history = rootHistory;
 }
 
-void Search::addLeafValue(SearchNode& node, double winValue, double noResultValue, double scoreMean, double scoreMeanSq, double lead, int32_t virtualLossesToSubtract) {
+void Search::addLeafValue(SearchNode& node, SearchThread& thread, double winValue, double noResultValue, double scoreMean, double scoreMeanSq, double lead, int32_t virtualLossesToSubtract) {
   double utility =
     getResultUtility(winValue, noResultValue)
     + getScoreUtility(scoreMean, scoreMeanSq, 1.0);
 
   // cout << "myUtility " << utility << endl;
 
-  vector<double> gameState(node.nnOutput->boardState.toOneHotFeatureVector());
+  // vector<double> gameState(node.nnOutput->boardState.toOneHotFeatureVector());
   // cout << utility << endl;
   // pair<double, int> QueryValue = 
 
@@ -1733,33 +1725,55 @@ void Search::addLeafValue(SearchNode& node, double winValue, double noResultValu
 
 
 
-  double memoryQueryUtility = 0;
+  // double memoryQueryUtility = 0;
   // double memoryQueryVisit = 0;
   // int visitCount = 1;
   // node.stats.R = 0;
   
-  if(memoryPtr->entries.size() > 0){
+  // if(memoryPtr->entries.size() > 0){
     // pair<double, int> query = memoryPtr->QueryPair((FeatureVector) node.nnOutput->midLayerFeatures);
     // pair<double, int> query = memoryPtr->QueryPair(gameState);
     // memoryQueryUtility = query.first;
     // memoryQueryVisit = query.second;
     // utility = (1-lambda)*utility + lambda*memoryQueryUtility;
 
-    memoryQueryUtility = memoryPtr->Query(gameState);
-    utility = (1-lambda)*utility + lambda*memoryQueryUtility;
+    // memoryQueryUtility = memoryPtr->Query(gameState);
+    // utility = (1-lambda)*utility + lambda*memoryQueryUtility;
     
     // Do we need to change it or not?
     // visitCount = (1-lambda)*(node.stats.visits + 1) + lambda*memoryQueryVisit;
-  }
+  // }
 
 
   // memoryPtr->Update(searchCount++, node.nnOutput->midLayerFeatures, utility, node.stats.visits+1);
-  memoryPtr->Update(searchCount, gameState, utility, node.stats.visits+1);
-  searchCount = (searchCount+1)%800;
+  // memoryPtr->Update(searchCount, gameState, utility, node.stats.visits+1);
+  // searchCount = (searchCount+1)%800;
   
   // cout << memoryPtr->Query((FeatureVector) node.nnOutput->midLayerFeatures) << endl;
   // cout << node.nnOutput->midLayerFeatures.size() << endl;
   // int a = 0;
+
+  {
+    // MMCTS Related
+    Hash128 &hash = thread.board.pos_hash;
+    auto intFeatureVector = thread.board.toOneHotFeatureVector();
+    FeatureVector featureVector(intFeatureVector.begin(), intFeatureVector.end());
+    double origUtility = utility;
+
+    // Use memory query when memory's useful
+    if (memoryPtr->isFull()) {
+      thread.logger->write("Start querying ...");
+      auto queryResult = memoryPtr->query(featureVector);
+      double memValue = queryResult.first;
+      utility = (1 - lambda) * utility + lambda * memValue;
+    }
+
+    // Add to memory if not exists
+    if (!memoryPtr->hasHash(hash)) {
+      thread.logger->write("Adding to memory ...");
+      memoryPtr->update(hash, featureVector, origUtility, node.stats.visits);
+    }
+  }
 
   while(node.statsLock.test_and_set(std::memory_order_acquire));
   
@@ -1867,7 +1881,7 @@ void Search::initNodeNNOutput(
   double scoreMeanSq = (double)node.nnOutput->whiteScoreMeanSq;
   double lead = (double)node.nnOutput->whiteLead;
 
-  addLeafValue(node,winProb,noResultProb,scoreMean,scoreMeanSq,lead,virtualLossesToSubtract);
+  addLeafValue(node, thread, winProb, noResultProb, scoreMean, scoreMeanSq, lead, virtualLossesToSubtract);
 }
 
 void Search::playoutDescend(
@@ -1893,7 +1907,7 @@ void Search::playoutDescend(
       double scoreMean = 0.0;
       double scoreMeanSq = 0.0;
       double lead = 0.0;
-      addLeafValue(node, winValue, noResultValue, scoreMean, scoreMeanSq, lead, virtualLossesToSubtract);
+      addLeafValue(node, thread, winValue, noResultValue, scoreMean, scoreMeanSq, lead, virtualLossesToSubtract);
       return;
     }
     else {
@@ -1902,7 +1916,7 @@ void Search::playoutDescend(
       double scoreMean = ScoreValue::whiteScoreDrawAdjust(thread.history.finalWhiteMinusBlackScore,searchParams.drawEquivalentWinsForWhite,thread.history);
       double scoreMeanSq = ScoreValue::whiteScoreMeanSqOfScoreGridded(thread.history.finalWhiteMinusBlackScore,searchParams.drawEquivalentWinsForWhite);
       double lead = scoreMean;
-      addLeafValue(node, winValue, noResultValue, scoreMean, scoreMeanSq, lead, virtualLossesToSubtract);
+      addLeafValue(node, thread, winValue, noResultValue, scoreMean, scoreMeanSq, lead, virtualLossesToSubtract);
       return;
     }
   }

@@ -40,8 +40,8 @@ struct ReportedSearchValues {
 };
 
 struct NodeStats {
-  // int64_t visits;
-  double visits;
+  int64_t visits;
+  // double visits;
   double winValueSum;
   double noResultValueSum;
   double scoreMeanSum;
@@ -51,8 +51,8 @@ struct NodeStats {
   double utilitySqSum;
   double weightSum;
   double weightSqSum;
-  double utilityMemory;
-  double numVisitsMemory;
+  // double utilityMemory;
+  // double numVisitsMemory;
   // double R;
 
   NodeStats();
@@ -185,9 +185,9 @@ struct Search {
 
   // MMCTS Related
   std::unique_ptr<Memory> memoryPtr;
-  double lambda;
-  double eta;
-  int searchCount;
+  double lambda = 0.05;
+  // double eta;
+  // int searchCount;
 
 
   //Note - randSeed controls a few things in the search, but a lot of the randomness actually comes from
@@ -399,7 +399,7 @@ private:
     bool isRoot
   ) const;
 
-  void addLeafValue(SearchNode& node, double winValue, double noResultValue, double scoreMean, double scoreMeanSq, double lead, int32_t virtualLossesToSubtract);
+  void addLeafValue(SearchNode& node, SearchThread& thread, double winValue, double noResultValue, double scoreMean, double scoreMeanSq, double lead, int32_t virtualLossesToSubtract);
 
   void maybeRecomputeExistingNNOutput(
     SearchThread& thread, SearchNode& node, bool isRoot

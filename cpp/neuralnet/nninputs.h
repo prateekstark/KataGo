@@ -95,7 +95,7 @@ namespace NNInputs {
 
 struct NNOutput {
   Hash128 nnHash; //NNInputs - getHash
-  Board boardState;
+  // Board boardState;
 
   //Initially from the perspective of the player to move at the time of the eval, fixed up later in nnEval.cpp
   //to be the value from white's perspective.
