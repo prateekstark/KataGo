@@ -116,7 +116,7 @@ struct NNOutput {
   //Values in here will be set to negative for illegal moves, including superko
   float policyProbs[NNPos::MAX_NN_POLICY_SIZE];
 
-  std::vector<double> midLayerFeatures;
+  // std::vector<double> midLayerFeatures;
 
   int nnXLen;
   int nnYLen;

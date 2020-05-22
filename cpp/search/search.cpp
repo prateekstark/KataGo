@@ -181,7 +181,7 @@ Search::Search(SearchParams params, NNEvaluator* nnEval, const string& rSeed)
   // const uint64_t featureDim = 34656;
   const uint64_t featureDim = 1684;
   const uint64_t memorySize = 512;
-  const uint64_t numTrees = 128;
+  const uint64_t numTrees = 32;
   const uint64_t numNeighbors = 8;
 
   std::unique_ptr<Aggregator> aggregatorPtr = std::make_unique<WeightedAverageAggregatorPair>();
@@ -1622,8 +1622,7 @@ void Search::recomputeNodeStats(SearchNode& node, SearchThread& thread, int numV
   //Also add in the direct evaluation of this node.
 
   // double realUtility = 0;
-  vector<double> gameState(node.nnOutput->boardState.toOneHotFeatureVector());
-  double memoryQueryUtility = 0;
+  // double memoryQueryUtility = 0;
 
   {
     //Since we've scaled all the child weights in some arbitrary way, adjust and make sure
@@ -1645,14 +1644,14 @@ void Search::recomputeNodeStats(SearchNode& node, SearchThread& thread, int numV
 
     // cout << "utility: " << utility << endl;
 
-    if(memoryPtr->entries.size() > 0){
+    // if(memoryPtr->entries.size() > 0){
       // pair<double, int> query = memoryPtr->QueryPair(gameState);
       // memoryQueryUtility = query.first;
       // memoryQueryVisit = query.second;
       // pair<double, int> query = ;
-      memoryQueryUtility = memoryPtr->Query(gameState);
+      // memoryQueryUtility = memoryPtr->Query(gameState);
       
-    }
+    // }
 
     // utility = (1-lambda)*utility + lambda*updated_utility;
 
@@ -1673,8 +1672,10 @@ void Search::recomputeNodeStats(SearchNode& node, SearchThread& thread, int numV
   node.stats.visits += numVisitsToAdd;
 
   // cout << "utilitySumBefore: " << utilitySum << endl;
-  memoryPtr->Update(searchCount++, gameState, utilitySum/node.stats.visits, node.stats.visits);
-  utilitySum = ((1-lambda)*(utilitySum/node.stats.visits) + lambda*memoryQueryUtility)*node.stats.visits;
+  vector<double> gameState(node.nnOutput->boardState.toOneHotFeatureVector());
+  memoryPtr->Update(searchCount, gameState, utilitySum/node.stats.visits, node.stats.visits);
+  searchCount = (searchCount+1)%800;
+  // utilitySum = ((1-lambda)*(utilitySum/node.stats.visits) + lambda*memoryQueryUtility)*node.stats.visits;
   // cout << "utilitySumAfter: " << utilitySum << endl;
   
   //It's possible that these values are a bit wrong if there's a race and two threads each try to update this
@@ -1733,7 +1734,7 @@ void Search::addLeafValue(SearchNode& node, double winValue, double noResultValu
 
 
   double memoryQueryUtility = 0;
-  double memoryQueryVisit = 0;
+  // double memoryQueryVisit = 0;
   // int visitCount = 1;
   // node.stats.R = 0;
   
@@ -1750,8 +1751,11 @@ void Search::addLeafValue(SearchNode& node, double winValue, double noResultValu
     // Do we need to change it or not?
     // visitCount = (1-lambda)*(node.stats.visits + 1) + lambda*memoryQueryVisit;
   }
+
+
   // memoryPtr->Update(searchCount++, node.nnOutput->midLayerFeatures, utility, node.stats.visits+1);
-  memoryPtr->Update(searchCount++, gameState, utility, node.stats.visits+1);
+  memoryPtr->Update(searchCount, gameState, utility, node.stats.visits+1);
+  searchCount = (searchCount+1)%800;
   
   // cout << memoryPtr->Query((FeatureVector) node.nnOutput->midLayerFeatures) << endl;
   // cout << node.nnOutput->midLayerFeatures.size() << endl;
@@ -1775,6 +1779,7 @@ void Search::addLeafValue(SearchNode& node, double winValue, double noResultValu
   node.stats.weightSqSum += 1.0;
   node.virtualLosses -= virtualLossesToSubtract;
   node.statsLock.clear(std::memory_order_release);
+  // cout << memoryPtr->entries.size() << endl;
 }
 
 //Assumes node is locked

@@ -463,7 +463,7 @@ NNOutput::~NNOutput() {
     delete[] noisedPolicyProbs;
     noisedPolicyProbs = NULL;
   }
-  midLayerFeatures.clear();
+  // midLayerFeatures.clear();
 }
 
 

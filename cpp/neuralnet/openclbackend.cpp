@@ -2140,8 +2140,8 @@ struct Buffers {
 
 
   // Made this a variable in BufferScope
-  size_t batchXYElts;
-  size_t maxMidChannels;
+  // size_t batchXYElts;
+  // size_t maxMidChannels;
 
   cl_mem mask;
   cl_mem maskSum;
@@ -2183,7 +2183,7 @@ struct Buffers {
   Buffers& operator=(const Buffers&) = delete;
 
   Buffers(ComputeHandleInternal* handle, const Model& m) {
-    batchXYElts = (size_t)m.maxBatchSize * m.nnXLen * m.nnYLen;
+    size_t batchXYElts = (size_t)m.maxBatchSize * m.nnXLen * m.nnYLen;
     size_t batchElts = (size_t)m.maxBatchSize;
 
     inputElts = m.numInputChannels * batchXYElts;
@@ -2198,7 +2198,7 @@ struct Buffers {
 
     trunk = createReadWriteBuffer(handle, m.trunk->trunkNumChannels * batchXYElts);
     trunkScratch = createReadWriteBuffer(handle, m.trunk->trunkNumChannels * batchXYElts);
-    maxMidChannels = std::max(m.trunk->regularNumChannels + m.trunk->dilatedNumChannels, m.trunk->midNumChannels);
+    size_t maxMidChannels = std::max(m.trunk->regularNumChannels + m.trunk->dilatedNumChannels, m.trunk->midNumChannels);
 
     mid = createReadWriteBuffer(handle, maxMidChannels * batchXYElts);
     midScratch = createReadWriteBuffer(handle, maxMidChannels * batchXYElts);
@@ -2576,17 +2576,17 @@ void NeuralNet::getOutput(
     buffers->convWorkspace2
   );
 
-  size_t feature_size = (size_t) ((buffers->batchXYElts)*(buffers->maxMidChannels));
-  float* extractFeature = new float[feature_size];
+  // size_t feature_size = (size_t) ((buffers->batchXYElts)*(buffers->maxMidChannels));
+  // float* extractFeature = new float[feature_size];
 
   // cout << sizeof(buffers->mid) << endl;
   // cout << feature_size << endl;
   cl_bool blocking = CL_TRUE;
 
-  err = clEnqueueReadBuffer(
-    handle->commandQueue, buffers->mid, blocking, 0, feature_size*batchSize*sizeof(float), extractFeature, 0, NULL, NULL
-  );
-  CHECK_ERR(err);
+  // err = clEnqueueReadBuffer(
+    // handle->commandQueue, buffers->mid, blocking, 0, feature_size*batchSize*sizeof(float), extractFeature, 0, NULL, NULL
+  // );
+  // CHECK_ERR(err);
   
   err = clEnqueueReadBuffer(
     handle->commandQueue, buffers->policyPass, blocking, 0, inputBuffers->singlePolicyPassResultBytes*batchSize, inputBuffers->policyPassResults, 0, NULL, NULL
@@ -2645,9 +2645,9 @@ void NeuralNet::getOutput(
     assert(output->nnYLen == nnYLen);
 
     float* policyProbs = output->policyProbs;
-    for(int a=0;a<feature_size;a++){
-      output->midLayerFeatures.push_back(extractFeature[a]);
-    }
+    // for(int a=0;a<feature_size;a++){
+      // output->midLayerFeatures.push_back(extractFeature[a]);
+    // }
     // output->midLayerFeatures {extractFeature, extractFeature+feature_size};
 
     //These are not actually correct, the client does the postprocessing to turn them into

@@ -53,7 +53,7 @@ struct NodeStats {
   double weightSqSum;
   double utilityMemory;
   double numVisitsMemory;
-  double R;
+  // double R;
 
   NodeStats();
   ~NodeStats();
