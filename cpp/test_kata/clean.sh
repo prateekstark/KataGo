@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-rm result-*
+rm -rf result-* gtp_logs

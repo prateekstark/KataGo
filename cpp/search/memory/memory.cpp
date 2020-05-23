@@ -31,6 +31,9 @@ void Memory::update(
   assert(featureVector.size()==featureDim);
 
   EntryID id = getID(hash);
+  // std::cout << touchCounter << std::endl;
+  // std::cout << entries.size() << std::endl;
+
   MemoryEntry entry(
       id,
       touchCounter++,
@@ -48,6 +51,7 @@ void Memory::update(
 	if (entries.size() > memorySize) {
 	  auto &index_by_touch_stamp = entries.get<1>();
 	  auto target = index_by_touch_stamp.begin();
+    // std::cout << target->id << std::endl;
 	  index_by_touch_stamp.erase(target);
 	}
 	annoyOutDated = true;

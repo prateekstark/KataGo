@@ -51,10 +51,9 @@ struct NodeStats {
   double utilitySqSum;
   double weightSum;
   double weightSqSum;
-  // double utilityMemory;
-  // double numVisitsMemory;
-  // double R;
-
+  double memUtility = 0;
+  double memVisits = 0;
+  // double R = 0;
   NodeStats();
   ~NodeStats();
 
@@ -186,8 +185,7 @@ struct Search {
   // MMCTS Related
   std::unique_ptr<Memory> memoryPtr;
   double lambda = 0.05;
-  // double eta;
-  // int searchCount;
+  double eta = 2;
 
 
   //Note - randSeed controls a few things in the search, but a lot of the randomness actually comes from
