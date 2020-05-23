@@ -1597,10 +1597,10 @@ void Search::recomputeNodeStats(SearchNode& node, SearchThread& thread, int numV
 
     // Some nodes, that we are considering, i.e with desiredWeight > 0, we are counting memory updates only for them.
     // Total number of memory visits, for good nodes.
-    nodeNetMemVisits += childMemoryUtility[i];
+    nodeNetMemVisits += childMemoryVisits[i];
     // Total Utility for good child nodes.
-    nodeNetMemUtility += childMemoryUtility[i];
-    R += nodeNetMemUtility*nodeNetMemVisits;
+    nodeNetMemUtility += weightScaling * childMemoryUtility[i];
+    R += weightScaling * childMemoryVisits[i]*childMemoryUtility[i];
 
     utilitySqSum += weightScaling * utilitySqSums[i];
     weightSum += desiredWeight;
@@ -1609,7 +1609,7 @@ void Search::recomputeNodeStats(SearchNode& node, SearchThread& thread, int numV
 
   double X = max(nodeNetMemVisits/eta, 1.0);
   nodeNetMemVisits = X;
-  nodeNetMemUtility = (R - nodeNetMemVisits*X)/nodeNetMemVisits;
+  nodeNetMemUtility = R/nodeNetMemVisits;
 
   //Also add in the direct evaluation of this node.
 
