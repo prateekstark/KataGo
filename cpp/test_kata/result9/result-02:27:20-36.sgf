@@ -1,0 +1,37 @@
+(;FF[4]CA[UTF-8]AP[gogui-twogtp:1.5.1]
+KM[6.5]PB[KataGo:mmcts v1.4.2]PW[KataGo:1.4.2]DT[2020-05-26]RE[W+R]
+C[Black command: ./mmcts_katago.sh
+White command: ./orig_katago.sh
+Black version: mmcts v1.4.2
+White version: 1.4.2
+Result[Black\]: W+R
+Result[White\]: W+R
+Host: stark-hp-pavilion-laptop-15-cc1xx (Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz)
+Date: May 26, 2020 at 11:20:19 AM IST]
+;B[pq];W[cd];B[qd];W[cp];B[od];W[ed];B[dp];W[dq];B[eq];W[do]
+;B[ep];W[cq];B[po];W[iq];B[eo];W[dn];B[en];W[dm];B[em];W[el]
+;B[dl];W[ek];B[cl];W[cj];B[bj];W[ci];B[bi];W[bh];B[ch];W[dh]
+;B[cg];W[bg];B[ck];W[cf];B[dj];W[di];B[ej];W[gl];B[ei];W[eh]
+;B[bn];W[bo];B[er];W[dr];B[cm];W[co];B[fh];W[hn];B[hp];W[ip]
+;B[hq];W[ho];B[ir];W[jr];B[hr];W[kq];B[dk];W[hk];B[fj];W[gk]
+;B[kn];W[fg];B[io];W[gh];B[gi];W[hi];B[in];W[gj];B[bl];W[nq]
+;B[mo];W[op];B[pp];W[or];B[jc];W[kd];B[jd];W[ke];B[pr];W[kp]
+;B[oq];W[mp];B[no];W[kc];B[gc];W[fc];B[fb];W[eb];B[jp];W[jq]
+;B[fd];W[ec];B[je];W[jf];B[hm];W[gm];B[gn];W[go];B[gp];W[fn]
+;B[fo];W[if];B[fi];W[hh];B[ff];W[eg];B[kb];W[lb];B[jb];W[mc]
+;B[hd];W[qi];B[qk];W[qf];B[nb];W[pk];B[pl];W[pj];B[ol];W[nr]
+;B[ij];W[jk];B[kf];W[lf];B[kg];W[lg];B[kh];W[li];B[hf];W[hg]
+;B[ki];W[ai];B[ik];W[il];B[jj];W[kk];B[lh];W[kj];B[mh];W[am]
+;B[ji];W[hj];B[gf];W[of];B[gg];W[jm];B[gn];W[hl];B[mk];W[ne]
+;B[ko];W[mj];B[fk];W[fl];B[nj];W[ni];B[mi];W[lj];B[an];W[aj]
+;B[ig];W[nk];B[js];W[ks];B[lr];W[mr];B[lq];W[lp];B[os];W[ns]
+;B[ls];W[is];B[np];W[ps];B[hs];W[kr];B[lo];W[jo];B[jn];W[nh]
+;B[ih];W[qr];B[rq];W[qq];B[rp];W[rd];B[rc];W[re];B[jp];W[rb]
+;B[qc];W[sc];B[qb];W[nc];B[oc];W[jo];B[pe];W[ma];B[ra];W[sb]
+;B[na];W[mb];B[pb];W[rr];B[sr];W[rk];B[jp];W[ql];B[qm];W[rl]
+;B[pf];W[pg];B[qg];W[rg];B[og];W[ng];B[ph];W[qh];B[nl];W[oj]
+;B[rm];W[pg];B[gb];W[ef];B[ea];W[da];B[fa];W[cb];B[br];W[bq]
+;B[ar];W[aq];B[es];W[cr];B[ll];W[fe];B[gd];W[oh];B[sm];W[mg]
+;B[sk];W[rj];B[sl];W[sj];B[ge];W[bk];B[ee];W[de];B[im];W[km]
+;B[lm];W[jl];B[fm];W[nd];B[oe];W[jo];B[js];W[ds];B[jp];W[is]
+;B[qp];W[nj];B[js];W[lk];B[ml];W[fe];B[ka];W[ee])

@@ -1,0 +1,26 @@
+# Black: KataGo
+# BlackCommand: ./mmcts_katago.sh
+# BlackLabel: KataGo:mmcts v1.4.2
+# BlackVersion: mmcts v1.4.2
+# Date: May 25, 2020 at 5:16:21 PM IST
+# Host: stark-hp-pavilion-laptop-15-cc1xx (Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz)
+# Komi: 6.5
+# Referee: -
+# Size: 19
+# White: KataGo
+# WhiteCommand: ./orig_katago.sh
+# WhiteLabel: KataGo:1.4.2
+# WhiteVersion: 1.4.2
+# Xml: 0
+#
+#GAME	RES_B	RES_W	RES_R	ALT	DUP	LEN	TIME_B	TIME_W	CPU_B	CPU_W	ERR	ERR_MSG
+0	B+R	B+R	B+R	0	-	189	2500.9	1567.1	2500.8	1566.9	0	
+1	W+R	W+R	W+R	1	-	149	1839.7	1201.7	1839.6	1201.6	0	
+2	B+R	B+R	B+R	0	-	253	2723.3	1741	2723.2	1740.9	0	
+3	W+R	W+R	W+R	1	-	137	1753.9	1149.1	1753.8	1149	0	
+4	W+R	W+R	W+R	0	-	144	2077.3	1418.2	2077.2	1418.1	0	
+5	W+R	W+R	W+R	1	-	261	2757.3	1712.2	2757.2	1712.1	0	
+6	W+R	W+R	W+R	0	-	198	2336.6	1549.6	2336.5	1549.5	0	
+7	W+R	W+R	W+R	1	-	253	2679	1797.3	2678.9	1797.2	0	
+8	W+R	W+R	W+R	0	-	196	2416.3	1616.1	2416.2	1616	0	
+9	W+R	W+R	W+R	1	-	225	2570.8	1645.1	2570.7	1644.9	0	

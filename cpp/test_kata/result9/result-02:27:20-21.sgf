@@ -1,0 +1,37 @@
+(;FF[4]CA[UTF-8]AP[gogui-twogtp:1.5.1]
+KM[6.5]PB[KataGo:mmcts v1.4.2]PW[KataGo:1.4.2]DT[2020-05-26]RE[W+R]
+C[Black command: ./mmcts_katago.sh
+White command: ./orig_katago.sh
+Black version: mmcts v1.4.2
+White version: 1.4.2
+Result[Black\]: W+R
+Result[White\]: W+R
+Host: stark-hp-pavilion-laptop-15-cc1xx (Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz)
+Date: May 26, 2020 at 8:02:24 AM IST]
+;B[cd];W[qd];B[dq];W[pq];B[ed];W[po];B[do];W[od];B[kq];W[jp]
+;B[kp];W[jo];B[jq];W[hp];B[oq];W[op];B[nq];W[pr];B[iq];W[cm]
+;B[ck];W[cp];B[co];W[bo];B[dp];W[bq];B[cq];W[bp];B[dm];W[cn]
+;B[dl];W[bl];B[ip];W[hn];B[io];W[fm];B[dn];W[fk];B[qn];W[qk]
+;B[qp];W[np];B[mq];W[pp];B[qo];W[pm];B[rl];W[rk];B[pn];W[on]
+;B[om];W[qm];B[nn];W[oo];B[rr];W[rm];B[nm];W[mo];B[ln];W[rn]
+;B[qq];W[qr];B[rs];W[rq];B[rp];W[sp];B[sq];W[so];B[hk];W[fi]
+;B[hi];W[fg];B[hd];W[cg];B[mc];W[fo];B[ci];W[hg];B[il];W[jc]
+;B[pc];W[oc];B[ob];W[pd];B[qb];W[ld];B[gh];W[fh];B[gg];W[de]
+;B[dd];W[gf];B[hf];W[fe];B[ge];W[ff];B[fd];W[qc];B[pb];W[lc]
+;B[mb];W[rb];B[md];W[me];B[lb];W[kb];B[le];W[je];B[lf];W[ne]
+;B[ig];W[hb];B[ee];W[ef];B[gb];W[gc];B[fb];W[ke];B[id];W[jd]
+;B[ib];W[jb];B[ic];W[jg];B[lh];W[jh];B[li];W[dj];B[lg];W[ij]
+;B[ii];W[ji];B[jj];W[na];B[nb];W[kj];B[jk];W[ki];B[mj];W[kk]
+;B[kl];W[mk];B[nk];W[ll];B[ra];W[sb];B[ml];W[lk];B[oj];W[km]
+;B[jl];W[lm];B[mn];W[jm];B[in];W[im];B[hm];W[ho];B[jf];W[kf]
+;B[if];W[kg];B[bk];W[gi];B[hh];W[br];B[hl];W[fq];B[er];W[fr]
+;B[cr];W[bs];B[bh];W[gm];B[hj];W[bg];B[cl];W[bm];B[eq];W[ds]
+;B[es];W[cs];B[fs];W[gr];B[hq];W[fp];B[gs];W[hr];B[hs];W[ir]
+;B[is];W[jr];B[kd];W[kc];B[gq];W[qs];B[di];W[ej];B[gj];W[el]
+;B[gl];W[em];B[dg];W[df];B[dh];W[be];B[ce];W[cf];B[bd];W[af]
+;B[cj];W[ei];B[ah];W[ag];B[fj];W[js];B[ad];W[ae];B[kr];W[ch]
+;B[bj];W[ek];B[ai];W[ak];B[aj];W[gp];B[kn];W[en];B[gn];W[ep]
+;B[ks];W[eo];B[kh];W[eg];B[ja];W[ka];B[ie];W[eh];B[lj];W[dk]
+;B[oa];W[qa];B[mm];W[al];B[pg];W[qg];B[qh];W[rg];B[rh];W[pf]
+;B[og];W[of];B[ng];W[pi];B[ph];W[sg];B[jn];W[or];B[nr];W[ro]
+;B[ia];W[pj];B[oi];W[ri];B[qi];W[qj])

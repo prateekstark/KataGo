@@ -1,0 +1,43 @@
+(;FF[4]CA[UTF-8]AP[gogui-twogtp:1.5.1]
+KM[6.5]PB[KataGo:mmcts v1.4.2]PW[KataGo:1.4.2]DT[2020-05-25]RE[B+0.5]
+C[Black command: ./mmcts_katago.sh
+White command: ./orig_katago.sh
+Black version: mmcts v1.4.2
+White version: 1.4.2
+Result[Black\]: B+0.5
+Result[White\]: B+0.5
+Host: stark-hp-pavilion-laptop-15-cc1xx (Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz)
+Date: May 25, 2020 at 10:45:25 PM IST]
+;B[dd];W[pc];B[pq];W[cp];B[po];W[ep];B[qe];W[qd];B[pe];W[nd]
+;B[qi];W[cc];B[oc];W[nc];B[pd];W[qc];B[dc];W[cd];B[de];W[bf]
+;B[gq];W[od];B[dq];W[eq];B[er];W[dp];B[cr];W[iq];B[go];W[cq]
+;B[dr];W[dl];B[kq];W[io];B[ko];W[hd];B[gm];W[im];B[km];W[pi]
+;B[pj];W[oj];B[ph];W[oi];B[qj];W[ol];B[kk];W[pk];B[cf];W[bg]
+;B[be];W[ce];B[cb];W[bd];B[hk];W[ik];B[bc];W[ae];B[hl];W[qk]
+;B[qg];W[eb];B[nk];W[ok];B[db];W[fc];B[ij];W[ng];B[dh];W[rk]
+;B[rh];W[fe];B[dj];W[dg];B[ef];W[eg];B[ff];W[hf];B[gf];W[hg]
+;B[fh];W[jj];B[ii];W[jk];B[il];W[fn];B[gn];W[rj];B[ri];W[ro]
+;B[kh];W[kf];B[qp];W[ln];B[kn];W[lp];B[lq];W[nn];B[ge];W[he]
+;B[qn];W[mp];B[mq];W[rn];B[dn];W[gp];B[hp];W[fp];B[hq];W[cm]
+;B[cn];W[bn];B[bo];W[bl];B[an];W[bm];B[co];W[en];B[bq];W[bp]
+;B[ap];W[br];B[aq];W[dm];B[ar];W[am];B[ao];W[gh];B[bj];W[do]
+;B[bs];W[ej];B[fi];W[fj];B[di];W[fl];B[fo];W[gi];B[gj];W[df]
+;B[fg];W[fd];B[dk];W[bk];B[ek];W[bi];B[ch];W[cg];B[ee];W[eo]
+;B[fk];W[og];B[pg];W[nq];B[nr];W[np];B[em];W[or];B[mr];W[oq]
+;B[pr];W[os];B[rr];W[kp];B[jq];W[jp];B[ip];W[jl];B[jm];W[kj]
+;B[lm];W[lk];B[ml];W[nl];B[mk];W[mj];B[bh];W[ck];B[cj];W[ak]
+;B[jo];W[jh];B[rp];W[rd];B[re];W[mm];B[ji];W[ki];B[ih];W[jg]
+;B[ll];W[el];B[fm];W[kl];B[nj];W[mi];B[gd];W[gc];B[lo];W[mn]
+;B[hc];W[ic];B[in];W[qm];B[bb];W[on];B[of];W[nf];B[oe];W[eh]
+;B[ei];W[sd];B[rm];W[pn];B[qo];W[sm];B[ec];W[fb];B[so];W[rl]
+;B[ea];W[fa];B[da];W[hb];B[aj];W[se];B[sf];W[sn];B[sp];W[ne]
+;B[ps];W[ag];B[ah];W[ni];B[ig];W[mo];B[hm];W[if];B[sj];W[ns]
+;B[ms];W[sk];B[si];W[oo];B[oh];W[ac];B[nh];W[mh];B[ab];W[gl]
+;B[ad];W[hh];B[hj];W[ac];B[jf];W[kg];B[ad];W[rf];B[sg];W[ac]
+;B[lj];W[li];B[ad];W[rg];B[qf];W[ac];B[hi];W[ad];B[pp];W[gk]
+;B[ed];W[gg];B[op];W[id];B[fq];W[gb];B[ir];W[mg];B[ho];W[ha]
+;B[ai];W[lf];B[ci];W[sc];B[];W[ie];B[];W[om];B[];W[kd]
+;B[];W[rb];B[];W[pb];B[];W[qa];B[];W[pa];B[];W[jd]
+;B[];W[mb];B[];W[mc];B[];W[oa];B[];W[lc];B[];W[lh]
+;B[ep];W[la];B[];W[lj];B[sq];W[sl];B[qr];W[sa];B[];W[md]
+;B[];W[je];B[fj];W[ob];B[eo];W[];B[])
