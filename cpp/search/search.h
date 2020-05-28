@@ -17,7 +17,7 @@
 #include "../search/searchprint.h"
 #include "../search/timecontrols.h"
 // #include "../search/memory/memory.h"
-#include "../search/DyMeNNS/memory.cpp"
+#include "../search/DyMeNNS/memory.h"
 
 struct SearchNode;
 struct SearchThread;
