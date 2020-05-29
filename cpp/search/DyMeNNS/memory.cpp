@@ -142,7 +142,7 @@ pair<double, double> Memory::query(float* featureVector){
 	for(int i=0;i<memArray.size();i++){
 		similarity = cosine_similarity(featureVector, memArray[i].arrayFeatures, this->featureDimension);
 		top_neighbours.push(make_pair(-similarity, i));
-		if(top_neighbours.size() > numNeighbors){
+		if(top_neighbours.size() > this->numNeighbors){
 			top_neighbours.pop();
 		}
 	}
@@ -151,12 +151,15 @@ pair<double, double> Memory::query(float* featureVector){
 	double visits = 0;
 	double similarity_sum = 0;
 	
-	for(int i=0;i<numNeighbors;i++){
+	for(int i=0;i<this->numNeighbors;i++){
 		pair<double, double> result = top_neighbours.top();
 		top_neighbours.pop();
 		similarity_sum += result.first;
 		utility += result.first * memArray[result.second].value;
 		visits += result.first * memArray[result.second].visits;
 	}
-	return make_pair(utility/similarity_sum, visits/similarity_sum);
+	if(similarity_sum != 0){
+		return make_pair(utility/similarity_sum, visits/similarity_sum);	
+	}
+	return make_pair(0, 0);
 }
