@@ -177,9 +177,9 @@ Search::Search(SearchParams params, NNEvaluator* nnEval, const string& rSeed)
 
   // const uint64_t featureDim = Board::MAX_ARR_SIZE * 4;
   const uint64_t featureDim = 19*19;
-  const uint64_t memorySize = 2000;
+  const uint64_t memorySize = 3000;
   // const uint64_t numTrees = 10;
-  const uint64_t numNeighbors = 7;
+  const uint64_t numNeighbors = 20;
 
   // std::unique_ptr<Aggregator> aggregatorPtr = std::make_unique<AverageAggregator>();
   // memoryPtr = std::make_unique<Memory>(featureDim, memorySize, numTrees, numNeighbors, aggregatorPtr);
@@ -1662,20 +1662,28 @@ void Search::recomputeNodeStats(SearchNode& node, SearchThread& thread, int numV
 
   while(node.statsLock.test_and_set(std::memory_order_acquire));
   node.stats.visits += numVisitsToAdd;
-  
+
   {
     // MMCTS Related
     if (node.nnOutput != nullptr){
       Hash128 &hash = node.nnOutput->nnHash;
       float* whiteOwnerMapFeature = node.nnOutput->whiteOwnerMap;
+      if ((memoryPtr->memArray.size() == memoryPtr->memLength) && (whiteOwnerMapFeature != NULL)) {
+        auto queryResult = memoryPtr->query(whiteOwnerMapFeature);
+        double memValue = queryResult.first;
+        double memVisits = queryResult.second;
+        utilitySum = ((1 - lambda) * node.stats.utilitySum) + (lambda * memValue * (node.stats.visits));
+        // node.stats.memUtility = memValue;
+        // node.stats.memVisits = memVisits;
+      }
       if (whiteOwnerMapFeature != NULL) {
         memoryPtr->update(hash, whiteOwnerMapFeature, realUtility/node.stats.visits, node.stats.visits);
       }
     }
     
-    if (memoryPtr->memArray.size() == memoryPtr->memLength) {
-      utilitySum = ((1 - lambda) * utilitySum) + (lambda * nodeNetMemUtility * node.stats.visits);
-    }
+    // if (memoryPtr->memArray.size() == memoryPtr->memLength) {
+    //   utilitySum = ((1 - lambda) * utilitySum) + (lambda * nodeNetMemUtility * node.stats.visits);
+    // }
   }
 
   //It's possible that these values are a bit wrong if there's a race and two threads each try to update this
