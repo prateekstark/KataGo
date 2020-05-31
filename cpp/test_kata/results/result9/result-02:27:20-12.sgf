@@ -1,0 +1,38 @@
+(;FF[4]CA[UTF-8]AP[gogui-twogtp:1.5.1]
+KM[6.5]PB[KataGo:mmcts v1.4.2]PW[KataGo:1.4.2]DT[2020-05-26]RE[W+R]
+C[Black command: ./mmcts_katago.sh
+White command: ./orig_katago.sh
+Black version: mmcts v1.4.2
+White version: 1.4.2
+Result[Black\]: W+R
+Result[White\]: W+R
+Host: stark-hp-pavilion-laptop-15-cc1xx (Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz)
+Date: May 26, 2020 at 5:55:28 AM IST]
+;B[qd];W[dc];B[qp];W[dq];B[od];W[oq];B[pq];W[op];B[pn];W[ql]
+;B[qi];W[qo];B[ro];W[pp];B[qq];W[qn];B[rn];W[qm];B[ce];W[do]
+;B[jp];W[or];B[ed];W[ec];B[fd];W[gc];B[gp];W[cl];B[lq];W[mo]
+;B[ck];W[bk];B[cj];W[bj];B[dl];W[cm];B[ci];W[mc];B[ep];W[dp]
+;B[hd];W[ob];B[om];W[pj];B[hc];W[gb];B[gd];W[cd];B[bd];W[bc]
+;B[dd];W[cc];B[mm];W[rm];B[pr];W[pi];B[qh];W[sn];B[sp];W[ph]
+;B[qg];W[ko];B[km];W[jo];B[ip];W[io];B[mj];W[hp];B[hq];W[ho]
+;B[fq];W[pc];B[il];W[kq];B[kr];W[rr];B[rq];W[sr];B[rs];W[lp]
+;B[kp];W[mq];B[jq];W[sm];B[qr];W[lh];B[pd];W[qc];B[mh];W[mg]
+;B[nh];W[lf];B[li];W[kh];B[po];W[qj];B[ng];W[pg];B[nc];W[nb]
+;B[md];W[ld];B[me];W[lc];B[le];W[ke];B[ln];W[lo];B[kd];W[jd]
+;B[kf];W[je];B[jf];W[if];B[jg];W[he];B[mr];W[fn];B[go];W[hm]
+;B[gn];W[im];B[fl];W[gm];B[fm];W[gk];B[ig];W[qf];B[nq];W[ij]
+;B[jl];W[fk];B[ek];W[gi];B[hh];W[jm];B[hk];W[kl];B[kk];W[ll]
+;B[lk];W[ik];B[hl];W[gl];B[hj];W[hi];B[ii];W[gj];B[jk];W[eh]
+;B[ei];W[gh];B[hf];W[kn];B[ml];W[mn];B[lm];W[np];B[nr];W[dg]
+;B[cg];W[ch];B[bh];W[dh];B[bi];W[cf];B[bf];W[bg];B[df];W[ef]
+;B[cg];W[ih];B[jh];W[cf];B[de];W[af];B[cg];W[ps];B[so];W[cf]
+;B[be];W[ie];B[dm];W[cg];B[gg];W[gf];B[fg];W[hg];B[ff];W[ih]
+;B[fh];W[ji];B[mf];W[fi];B[ge];W[kg];B[cn];W[bn];B[bo];W[co]
+;B[dn];W[bm];B[bp];W[bq];B[br];W[aq];B[cr];W[cp];B[rf];W[re]
+;B[qe];W[pf];B[rd];W[rg];B[se];W[ri];B[dr];W[eo];B[en];W[ib]
+;B[fo];W[ao];B[eq];W[ap];B[ic];W[jb];B[rc];W[rb];B[sb];W[qb]
+;B[ac];W[ab];B[ad];W[ba];B[ej];W[ol];B[nl];W[pm];B[on];W[ok]
+;B[jj];W[sg];B[lg];W[kf];B[ai];W[aj];B[of];W[fc];B[ar];W[ag]
+;B[di];W[eg];B[hf];W[sq];B[ss];W[gf];B[fe];W[hb];B[ah];W[sf]
+;B[ii];W[jc];B[bb];W[cb];B[rh];W[sh];B[ki];W[id];B[hf];W[nn]
+;B[ae];W[nm])

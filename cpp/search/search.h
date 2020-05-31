@@ -1,8 +1,6 @@
 #ifndef SEARCH_SEARCH_H_
 #define SEARCH_SEARCH_H_
 
-#include <memory>
-
 #include "../core/global.h"
 #include "../core/hash.h"
 #include "../core/logger.h"
@@ -16,7 +14,6 @@
 #include "../search/searchparams.h"
 #include "../search/searchprint.h"
 #include "../search/timecontrols.h"
-// #include "../search/memory/memory.h"
 #include "../search/DyMeNNS/memory.h"
 
 struct SearchNode;
@@ -42,7 +39,6 @@ struct ReportedSearchValues {
 
 struct NodeStats {
   int64_t visits;
-  // double visits;
   double winValueSum;
   double noResultValueSum;
   double scoreMeanSum;
@@ -52,9 +48,11 @@ struct NodeStats {
   double utilitySqSum;
   double weightSum;
   double weightSqSum;
-  double memUtility = 0;
-  double memVisits = 0;
-  // double R = 0;
+
+  double memoryUtilitySum;
+  double memoryUtilitySqSum;
+  double memoryVisits;
+
   NodeStats();
   ~NodeStats();
 
@@ -74,7 +72,6 @@ struct SearchNode {
   //Constant during search--------------------------------------------------------------
   Player nextPla;
   Loc prevMoveLoc;
-
 
   //Mutable---------------------------------------------------------------------------
   //All of these values are protected under the mutex indicated by lockIdx
@@ -185,9 +182,10 @@ struct Search {
 
   // MMCTS Related
   std::unique_ptr<Memory> memoryPtr;
-  double lambda = 0.05;
-  double eta = 2;
-
+  uint64_t memorySize;
+  double memoryLambda;
+  uint64_t memoryNumNeighbors;
+  uint64_t memoryUpdateSchema;
 
   //Note - randSeed controls a few things in the search, but a lot of the randomness actually comes from
   //random symmetries of the neural net evaluations, see nneval.h
@@ -399,6 +397,8 @@ private:
   ) const;
 
   void addLeafValue(SearchNode& node, SearchThread& thread, double winValue, double noResultValue, double scoreMean, double scoreMeanSq, double lead, int32_t virtualLossesToSubtract);
+
+  void addLeafValue(SearchNode& node, SearchThread& thread, double winValue, double noResultValue, double scoreMean, double scoreMeanSq, double lead, int32_t virtualLossesToSubtract, bool isTerminal);
 
   void maybeRecomputeExistingNNOutput(
     SearchThread& thread, SearchNode& node, bool isRoot

@@ -1,0 +1,30 @@
+(;FF[4]CA[UTF-8]AP[gogui-twogtp:1.5.1]
+KM[6.5]PB[KataGo:mmcts v1.4.2]PW[KataGo:1.4.2]DT[2020-05-26]RE[W+R]
+C[Black command: ./mmcts_katago.sh
+White command: ./orig_katago.sh
+Black version: mmcts v1.4.2
+White version: 1.4.2
+Result[Black\]: W+R
+Result[White\]: W+R
+Host: stark-hp-pavilion-laptop-15-cc1xx (Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz)
+Date: May 26, 2020 at 8:31:12 AM IST]
+;B[cp];W[dc];B[qp];W[qd];B[ep];W[de];B[op];W[od];B[pj];W[dk]
+;B[ci];W[cg];B[ej];W[ek];B[fj];W[fk];B[gj];W[gk];B[hj];W[gq]
+;B[hk];W[er];B[gp];W[hp];B[go];W[iq];B[ho];W[cj];B[dj];W[bj]
+;B[jp];W[jq];B[ip];W[hq];B[bi];W[cn];B[kp];W[lq];B[qg];W[gm]
+;B[hm];W[pk];B[ok];W[qj];B[qi];W[qk];B[oj];W[pm];B[ol];W[ro]
+;B[rp];W[po];B[qo];W[qn];B[oo];W[ri];B[rh];W[rm];B[so];W[si]
+;B[bl];W[cl];B[bm];W[ai];B[ah];W[aj];B[bg];W[bn];B[cm];W[dm]
+;B[dn];W[bk];B[em];W[dl];B[bo];W[do];B[an];W[en];B[co];W[dn]
+;B[eq];W[dr];B[cr];W[al];B[mc];W[kc];B[me];W[ke];B[pc];W[pd]
+;B[oc];W[qc];B[nd];W[of];B[ph];W[he];B[ic];W[jd];B[re];W[rd]
+;B[fc];W[fe];B[db];W[eb];B[ec];W[cb];B[dd];W[cc];B[ee];W[ef]
+;B[ed];W[ce];B[fb];W[da];B[df];W[cf];B[ff];W[eg];B[ge];W[gf]
+;B[fd];W[gg];B[jb];W[jh];B[hd];W[ie];B[pf];W[pb];B[ob];W[qb]
+;B[nf];W[oe];B[pa];W[og];B[mh];W[oh];B[lg];W[rb];B[sc];W[sd]
+;B[qa];W[ni];B[lj];W[rf];B[qe];W[mj];B[mk];W[li];B[mi];W[nj]
+;B[lk];W[lh];B[mg];W[ra];B[sh];W[oi];B[pi];W[kb];B[kg];W[ii]
+;B[lb];W[ka];B[sb];W[nb];B[nc];W[oa];B[pa];W[na];B[mb];W[qa]
+;B[ma];W[pa];B[ne];W[jg];B[se];W[kh];B[ng];W[lf];B[pe];W[le]
+;B[pg];W[lc];B[ao];W[am];B[nk];W[kf];B[kq];W[kr];B[mq];W[lr]
+;B[lp];W[la];B[rj];W[mf];B[fr];W[fq];B[gr];W[hr])

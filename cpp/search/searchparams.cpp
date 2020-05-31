@@ -57,7 +57,11 @@ SearchParams::SearchParams()
    maxTimePondering(1.0e20),
    lagBuffer(0.0),
    searchFactorAfterOnePass(1.0),
-   searchFactorAfterTwoPass(1.0)
+   searchFactorAfterTwoPass(1.0),
+   memorySize(1000),
+   memoryLambda(0.05),
+   memoryNumNeighbors(7),
+   memoryUpdateSchema(1)
 {}
 
 SearchParams::~SearchParams()
