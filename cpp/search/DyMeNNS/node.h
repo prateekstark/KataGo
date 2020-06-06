@@ -5,16 +5,26 @@
 
 using namespace std;
 
+class MemoryNodeStats{
+public:
+	double winProb;
+	double noResultProb;
+	double scoreMean;
+	double scoreMeanSq;
+	double lead;
+	double utility;
+	double utilitySum;
+	double utilitySqSum;
+	double visits;
+  	MemoryNodeStats();
+  	~MemoryNodeStats();
+};
+
 class Node{
 public:
 	Hash128 hash;
-	vector<double> features;
-	double value;
-	double visits;
-	float arrayFeatures[361];
-
-	Node(Hash128 hash, vector<double> features, double value, double visits);
-
-	Node(Hash128 hash, float* features, double value, double visits, int featureDim);
-
+	float* feature;
+	int featureSize;
+	MemoryNodeStats stats;
+	Node(Hash128 hash, float* features, int featureSize, MemoryNodeStats stats);
 };

@@ -49,9 +49,11 @@ struct NodeStats {
   double weightSum;
   double weightSqSum;
 
+  MemoryNodeStats stats;
+
   double memoryUtilitySum;
   double memoryUtilitySqSum;
-  double memoryVisits;
+  // double memoryVisits;
 
   NodeStats();
   ~NodeStats();
@@ -182,6 +184,8 @@ struct Search {
 
   // MMCTS Related
   std::unique_ptr<Memory> memoryPtr;
+
+  // Memory* memory;
   uint64_t memorySize;
   double memoryLambda;
   uint64_t memoryNumNeighbors;

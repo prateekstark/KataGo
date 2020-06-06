@@ -325,7 +325,7 @@ vector<SearchParams> Setup::loadParams(
 
     if (cfg.contains("memoryUpdateSchema")) {
       params.memoryUpdateSchema = cfg.getUInt64(
-          "memoryUpdateSchema", (uint64_t) 0, (uint64_t) 2);
+          "memoryUpdateSchema", (uint64_t) 0, (uint64_t) 10);
     }
 
     if(cfg.contains("maxPlayoutsPondering"+idxStr)) params.maxPlayoutsPondering = cfg.getInt64("maxPlayoutsPondering"+idxStr, (int64_t)1, (int64_t)1 << 50);
